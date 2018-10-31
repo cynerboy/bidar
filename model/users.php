@@ -1,11 +1,11 @@
 <?php
 
-require_once(dirname(__DIR__). "/control/databaseApi.php");
+require_once(dirname(__DIR__). "/controller/databaseApi.php");
 
-class Users{
+class ModelUsers{
 
 
 
 }
 
-$users = new Users();
+$modelUsers = new ModelUsers();

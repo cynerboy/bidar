@@ -1,7 +1,16 @@
 <?php
 $titleSite = "Admin Login";
+$message = "";
 include ('../layout/header.php');
 require_once dirname(__DIR__) . '/config/initializeAddress.php';
+require_once dirname(__DIR__) . '/controller/superAdmin.php';
+
+if(isset($_POST['submit'])){
+
+    $message = $superAdmin->loginAdmin($_POST['username'], $_POST['password']);
+
+}
+
 ?>
     <div class="container-fluid">
 
@@ -39,7 +48,8 @@ require_once dirname(__DIR__) . '/config/initializeAddress.php';
             <div class="offset-xl-4 offset-lg-4 offset-md-4 offset-sm-4 offset-xs-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <br>
                 <h1 class="display-4 text-center">Admin Login</h1><br>
-                <form class="needs-validation" novalidate>
+                <?php if($message != ""){echo $message; } ?>
+                <form class="needs-validation" method="post">
                     <div class="form-row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <label for="validationTooltipUsername" class="col-form-label-lg">Username</label>
@@ -47,7 +57,7 @@ require_once dirname(__DIR__) . '/config/initializeAddress.php';
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="validationTooltipUsernamePrepend"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" autocomplete="off" class="form-control form-control-lg" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+                                <input type="text" name="username" autocomplete="off" class="form-control form-control-lg" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
                                 <div class="invalid-tooltip">
                                     Please choose a unique and valid username.
                                 </div>
@@ -59,7 +69,7 @@ require_once dirname(__DIR__) . '/config/initializeAddress.php';
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="validationTooltipUsernamePrepend"><i class="fas fa-lock"></i></span>
                                 </div>
-                                <input type="text" autocomplete="off" class="form-control form-control-lg" id="validationTooltipUsername" placeholder="Password" aria-describedby="validationTooltipUsernamePrepend" required>
+                                <input type="password" name="password" autocomplete="off" class="form-control form-control-lg" id="validationTooltipUsername" placeholder="Password" aria-describedby="validationTooltipUsernamePrepend" required>
                                 <div class="invalid-tooltip">
                                     Please choose a unique and valid username.
                                 </div>
@@ -67,7 +77,7 @@ require_once dirname(__DIR__) . '/config/initializeAddress.php';
                         </div>
                     </div>
                     <br>
-                    <button class="btn btn-primary btn-lg btn-block btn3d" type="submit">Login</button>
+                    <button class="btn btn-primary btn-lg btn-block btn3d" name="submit" type="submit">Login</button>
 
                 </form>
 

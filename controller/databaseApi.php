@@ -18,6 +18,24 @@ class Database{
         }
     }
 
+    public function selectQuery($query){
+
+        $result = $this->query($query);
+
+        $arr = [];
+
+        while ($row = $this->fetchArray($result)){
+
+            array_push($arr, $row);
+
+        }
+
+        mysqli_free_result($result);
+
+        return $arr;
+
+    }
+
     public function prep($value){
         $value = mysqli_real_escape_string($this->connection, $value);
         return $value;

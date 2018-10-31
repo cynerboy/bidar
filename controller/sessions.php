@@ -4,7 +4,7 @@ class session{
         session_start();
     }
 
-    public function setAuth(){
+    public function setAdminSession(){
 
         $_SESSION["autho"] = "whiter";
         return;
