@@ -1,7 +1,7 @@
 <?php
 $titleSite = "Admin Login";
 $message = "";
-include ('../layout/header.php');
+include ('../layout/loginHeader.php');
 
 require_once dirname(__DIR__) . '/controller/superAdmin.php';
 
@@ -54,6 +54,6 @@ if(isset($_POST['submit'])){
         </div>
 
 <?php
-include ('../layout/footer.php');
+include ('../layout/bothFooter.php');
 
 ?>
