@@ -4,6 +4,22 @@ require_once(dirname(__DIR__). "/controller/databaseApi.php");
 
 class ModelSuperAdmin{
 
+    public function insertTitleAndDescNews($title, $description){
+
+        global $db;
+
+        if($db->query("INSERT INTO superadminupdatenews(title, description)VALUES('$title', '$description')")){
+
+            return true;
+
+        }else{
+
+            return false;
+
+        }
+
+    }
+
     public function updateTitleNewsAndDescNews($title, $description){
 
         global $db;

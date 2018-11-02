@@ -24,6 +24,22 @@ class SuperAdmin{
 
     }
 
+    private function updateNewsReport($title, $description){
+
+        global $modelSuperAdmin;
+
+        if($modelSuperAdmin->insertTitleAndDescNews($title, $description)){
+
+            return true;
+
+        }else{
+
+            return false;
+
+        }
+
+    }
+
     public function updateNews($title, $description){
 
         global $db;
@@ -35,11 +51,19 @@ class SuperAdmin{
 
         if($modelSuperAdmin->updateTitleNewsAndDescNews($title, $description)){
 
-            $_SESSION["updater"] = "secured";
+            if($this->updateNewsReport($title, $description)){
 
-            redirect_to(SITE_ROOT . 'privatePathAdminManager');
+                $_SESSION["updater"] = "secured";
 
-            return null;
+                redirect_to(SITE_ROOT . 'privatePathAdminManager');
+
+                return null;
+
+            }else{
+
+                return $viewSuperAdmin->errorReportNews();
+
+            }
 
         }else{
 

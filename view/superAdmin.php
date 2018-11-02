@@ -4,6 +4,16 @@ require_once(dirname(__DIR__). "/controller/sessions.php");
 
 class ViewSuperAdmin{
 
+    public function errorReportNews(){
+
+        global $session;
+
+        $_SESSION['message'] = "You can't report update News! please contact with programmer";
+
+        return $session->messageError($_SESSION['message']);
+
+    }
+
     public function errorUpdateNews(){
 
         global $session;
