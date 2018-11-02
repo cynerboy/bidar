@@ -8,6 +8,8 @@ class session{
 
         if(isset($_SESSION['updater'])){
 
+            $_SESSION["updater"] = null;
+
             return true;
 
         }else{
