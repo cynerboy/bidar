@@ -9,6 +9,70 @@ require_once 'databaseApi.php';
 
 class SuperAdmin{
 
+    //
+
+    public function checkUpdater(){
+
+        global $session;
+        global $viewSuperAdmin;
+
+        if($session->checkUpdaterSession()){
+
+            return $viewSuperAdmin->successUpdateNews();
+
+        }
+
+    }
+
+    public function updateNews($title, $description){
+
+        global $db;
+        global $modelSuperAdmin;
+        global $viewSuperAdmin;
+
+        $title = $db->prep($title);
+        $description = $db->prep($description);
+
+        if($modelSuperAdmin->updateTitleNewsAndDescNews($title, $description)){
+
+            $_SESSION["updater"] = "secured";
+
+            redirect_to(SITE_ROOT . 'privatePathAdminManager');
+
+            return null;
+
+        }else{
+
+            return $viewSuperAdmin->errorUpdateNews();
+
+        }
+
+    }
+
+    public function showNews(){
+
+        global $modelSuperAdmin;
+
+        return $modelSuperAdmin->getTitleNewsAndDescNews();
+
+    }
+
+    public function checkAdmin(){
+
+        global $session;
+
+        if($session->checkAdminSession()){
+
+           return null;
+
+        }else{
+
+            redirect_to(SITE_ROOT);
+
+        }
+
+    }
+
     public function loginAdmin($username, $password){
 
         global $db;

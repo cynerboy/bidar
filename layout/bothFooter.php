@@ -18,9 +18,6 @@ require_once dirname(__DIR__) . '/controller/databaseApi.php';
 
     </div>
 
-
-    <script src="<?php echo SITE_ROOT . 'boot/custom/custom.js'; ?>" language="JavaScript" type="text/javascript"></script>
-
     </body>
     </html>
 <?php $db->CloseConnection(); ?>

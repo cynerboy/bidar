@@ -1,4 +1,13 @@
+// close after 20 second alert
+setTimeout(
+    function()
+    {
+        $("#closeAlert").slideUp();
+    }, 20000);
+
+// for visible password
 $(document).ready(function() {
+
     $("#span span").on('click', function(event) {
         event.preventDefault();
         if($('#show_hide_password input').attr("type") == "text"){

@@ -1,22 +1,23 @@
 <?php
 
-$titleSite = "Admin Area";
-$message = "";
-include ('../layout/header.php');
-
 require_once dirname(__DIR__) . '/controller/superAdmin.php';
 require_once dirname(__DIR__) . '/config/initializeAddress.php';
 require_once dirname(__DIR__) . '/controller/toolsFunctions.php';
 
-//session_start();
+$superAdmin->checkAdmin();
 
-if(!isset($_SESSION['autho']) || $_SESSION['autho'] != "whiter"){
+$message = $superAdmin->checkUpdater();
 
-    redirect_to(SITE_ROOT);
+$arr = $superAdmin->showNews();
+
+if(isset($_POST['submitNews'])){
+
+    $message = $superAdmin->updateNews($_POST['titleNews'], $_POST['descNews']);
 
 }
 
-
+$titleSite = "Admin Area";
+include ('../layout/header.php');
 ?>
 <br>
 <div class="row">
@@ -35,9 +36,30 @@ if(!isset($_SESSION['autho']) || $_SESSION['autho'] != "whiter"){
         </div>
     </div>
     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <?php if(isset($message)){echo $message; } ?>
         <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-home"></i> Data report</h1><br>...</div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-newspaper"></i> Make news</h1><br>...</div>
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-home"></i> Data report</h1><br>
+
+                ...
+
+            </div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-newspaper"></i> Make news</h1><br>
+
+                <form method="post">
+                    <div class="form-group text-right">
+                        <label for="exampleFormControlInput1">عنوان اخبار</label>
+                        <input type="text" name="titleNews" class="form-control" dir="rtl" id="exampleFormControlInput1" value="<?php echo $arr['0']['title']; ?>" placeholder="">
+                    </div>
+
+                    <div class="form-group text-right">
+                        <label for="exampleFormControlTextarea1">توضیحات اخبار</label>
+                        <textarea class="form-control" dir="rtl" name="descNews" id="exampleFormControlTextarea1" rows="3"><?php echo $arr['0']['description']; ?></textarea>
+                    </div>
+                    <br>
+                    <button class="btn btn-info btn-lg btn-block btn3d" name="submitNews" type="submit"><i class="fas fa-edit fa-2x"></i></button>
+                </form>
+
+            </div>
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-search"></i> Search</h1><br>...</div>
             <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-user-plus"></i> Add new user</h1><br>...</div>
             <div class="tab-pane fade" id="v-pills-zone" role="tabpanel" aria-labelledby="v-pills-zone-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-plus-circle"></i> Add new zone</h1><br>...</div>
