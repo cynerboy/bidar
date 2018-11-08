@@ -9,8 +9,6 @@ require_once 'databaseApi.php';
 
 class SuperAdmin{
 
-    //
-
     public function checkUpdater(){
 
         global $session;
