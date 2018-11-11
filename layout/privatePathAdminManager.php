@@ -34,7 +34,15 @@
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-search"></i> Search</h1><br>...</div>
             <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-user-plus"></i> Add new user</h1><br>...</div>
             <div class="tab-pane fade" id="v-pills-zone" role="tabpanel" aria-labelledby="v-pills-zone-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-plus-circle"></i> Add new zone</h1><br>...</div>
-            <div class="tab-pane fade" id="v-pills-structure" role="tabpanel" aria-labelledby="v-pills-structure-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-cubes"></i> Change structure</h1><br>...</div>
+            <div class="tab-pane fade" id="v-pills-structure" role="tabpanel" aria-labelledby="v-pills-structure-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-cubes"></i> Change structure</h1><br>
+
+                    <?php
+
+                    include "structure.php";
+
+                    ?>
+
+            </div>
             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-cogs"></i> Settings</h1><br>...</div>
             <div class="tab-pane fade" id="v-pills-history" role="tabpanel" aria-labelledby="v-pills-history-tab"><h1 class="display-4 text-center customTitle"><i class="fas fa-history"></i> History</h1><br>...</div>
         </div>
