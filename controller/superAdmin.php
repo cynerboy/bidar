@@ -9,14 +9,62 @@ require_once 'databaseApi.php';
 
 class SuperAdmin{
 
-    public function checkUpdater(){
+    public function checkNewMessage(){
 
         global $session;
         global $viewSuperAdmin;
 
         if($session->checkUpdaterSession()){
 
-            return $viewSuperAdmin->successUpdateNews();
+            switch ($_SESSION['updater']){
+
+                case "updateNews":
+                    $_SESSION["updater"] = null;
+                    return $viewSuperAdmin->successUpdateNews();
+                    break;
+
+                case "addWork":
+                    $_SESSION["updater"] = null;
+                    return $viewSuperAdmin->successInserttWork();
+                    break;
+
+                default:
+                    return null;
+
+            }
+
+        }
+
+    }
+
+    public function addWork($name, $description, $textSms){
+
+        global $db;
+        global $modelSuperAdmin;
+        global $viewSuperAdmin;
+
+        $name = $db->prep($name);
+        $description = $db->prep($description);
+
+        if($modelSuperAdmin->insertNameDescriptionTextSmsWork($name, $description, $textSms)){
+
+            if($modelSuperAdmin->insertNameDescriptionTextSmsWorkForReport($name, $description, $textSms)){
+
+                $_SESSION["updater"] = "addWork";
+
+                redirect_to(SITE_ROOT . 'privatePathAdminManager');
+
+                return null;
+
+            }else{
+
+                return $viewSuperAdmin->errorInsertReportWork();
+
+            }
+
+        }else{
+
+            return $viewSuperAdmin->errorInsertWork();
 
         }
 
@@ -51,7 +99,7 @@ class SuperAdmin{
 
             if($this->updateNewsReport($title, $description)){
 
-                $_SESSION["updater"] = "secured";
+                $_SESSION["updater"] = "updateNews";
 
                 redirect_to(SITE_ROOT . 'privatePathAdminManager');
 

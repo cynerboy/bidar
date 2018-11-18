@@ -4,6 +4,40 @@ require_once(dirname(__DIR__). "/controller/databaseApi.php");
 
 class ModelSuperAdmin{
 
+    public function insertNameDescriptionTextSmsWorkForReport($name, $description, $textSms){
+
+        global $db;
+
+        $workId = $db->selectTheLastId("work");
+
+        if($db->query("INSERT INTO superadmininsertworks(workId, name, description, textSms) VALUES( '$workId', '$name', '$description', '$textSms' );")){
+
+            return true;
+
+        }else{
+
+            return false;
+
+        }
+
+    }
+
+    public function insertNameDescriptionTextSmsWork($name, $description, $textSms){
+
+        global $db;
+
+        if($db->query("INSERT INTO work(name, description, textSms) VALUES('$name', '$description', '$textSms')")){
+
+            return true;
+
+        }else{
+
+            return false;
+
+        }
+
+    }
+
     public function insertTitleAndDescNews($title, $description){
 
         global $db;

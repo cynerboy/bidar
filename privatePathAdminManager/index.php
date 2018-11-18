@@ -6,13 +6,30 @@ require_once dirname(__DIR__) . '/controller/toolsFunctions.php';
 
 $superAdmin->checkAdmin();
 
-$message = $superAdmin->checkUpdater();
+$message = $superAdmin->checkNewMessage();
 
 $arr = $superAdmin->showNews();
 
 if(isset($_POST['submitNews'])){
 
     $message = $superAdmin->updateNews($_POST['titleNews'], $_POST['descNews']);
+
+}
+
+if(isset($_POST['workSubmit'])){
+
+    if (isset($_POST['descriptionWork'])){
+
+        $descriptionWork = 1;
+
+    }else{
+
+        $descriptionWork = 0;
+
+    }
+
+    $message = $superAdmin->addWork($_POST['workName'], $descriptionWork, $_POST["smsWork"]);
+
 
 }
 

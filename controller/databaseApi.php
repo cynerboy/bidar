@@ -18,6 +18,18 @@ class Database{
         }
     }
 
+    public function selectTheLastId($tableName){
+
+        $result = $this->query("SELECT MAX(id) FROM " . $tableName);
+
+        while ($row = $this->fetchAssoc($result)){
+
+            return $row['MAX(id)'];
+
+        }
+
+    }
+
     public function selectQuery($query){
 
         $result = $this->query($query);
