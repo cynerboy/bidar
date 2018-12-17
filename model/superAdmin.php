@@ -4,6 +4,54 @@ require_once(dirname(__DIR__). "/controller/databaseApi.php");
 
 class ModelSuperAdmin{
 
+    public function selectAllWork($id){
+
+        global $db;
+
+        return $db->selectQuery("SELECT * FROM work WHERE id='$id';")[0];
+
+    }
+
+    public function insertWorkIdNameDescriptionTextSmsForReport($workId, $name, $description, $textSms){
+
+        global $db;
+
+        if($db->query("INSERT INTO superadmindeleteworks(workId, name, description, textSms)VALUES('$workId', '$name', '$description', '$textSms')")){
+
+            return true;
+
+        }else{
+
+            return false;
+
+        }
+
+    }
+
+    public function deleteWorkRowWithId($id){
+
+        global $db;
+
+        if($db->query("DELETE FROM work WHERE id='$id'")){
+
+            return true;
+
+        }else{
+
+            return false;
+
+        }
+
+    }
+
+    public function selectIdNameDescriptionTextSmsWork(){
+
+        global $db;
+
+        return $db->selectQuery("SELECT id, name, description, textSms FROM work;");
+
+    }
+
     public function insertNameDescriptionTextSmsWorkForReport($name, $description, $textSms){
 
         global $db;

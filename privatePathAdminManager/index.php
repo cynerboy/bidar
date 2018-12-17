@@ -33,6 +33,12 @@ if(isset($_POST['workSubmit'])){
 
 }
 
+if(isset($_POST['deleteWork'])){
+
+    $superAdmin->deleteWorkRow($_POST['id']);
+
+}
+
 $titleSite = "Admin Area";
 include ('../layout/header.php');
 

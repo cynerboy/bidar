@@ -9,6 +9,62 @@ require_once 'databaseApi.php';
 
 class SuperAdmin{
 
+    public function deleteWorkRow($id){
+
+        global $db;
+        global $modelSuperAdmin;
+        global $viewSuperAdmin;
+
+        $id = $db->prep($id);
+
+        $arr = $modelSuperAdmin->selectAllWork($id);
+
+        $workId = $arr['id'];
+
+        $name = $arr['name'];
+
+        $description = $arr['description'];
+
+        $textSms = $arr['textSms'];
+
+        if($modelSuperAdmin->deleteWorkRowWithId($id)){
+
+            if($modelSuperAdmin->insertWorkIdNameDescriptionTextSmsForReport($workId, $name, $description, $textSms)){
+
+                $_SESSION['updater'] = "deleteWorkRow";
+
+                redirect_to(SITE_ROOT . 'privatePathAdminManager');
+
+                return null;
+
+            }else{
+
+                return $viewSuperAdmin->errorInsertDeleteWorkForReport();
+
+            }
+
+        }else{
+
+            return $viewSuperAdmin->errorDeleteWork();
+
+        }
+
+
+    }
+
+    public function getWorks(){
+
+        global $modelSuperAdmin;
+        global $viewSuperAdmin;
+
+        $arr = $modelSuperAdmin->selectIdNameDescriptionTextSmsWork();
+
+        return $viewSuperAdmin->showAllWork($arr);
+
+
+
+    }
+
     public function checkNewMessage(){
 
         global $session;
@@ -27,6 +83,10 @@ class SuperAdmin{
                     $_SESSION["updater"] = null;
                     return $viewSuperAdmin->successInserttWork();
                     break;
+
+                case "deleteWorkRow":
+                    $_SESSION["updater"] = null;
+                    return $viewSuperAdmin->successDeleteWorkRow();
 
                 default:
                     return null;
